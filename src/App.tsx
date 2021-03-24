@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { setConstantValue } from 'typescript';
 import './App.css';
 
 interface IPasteBin {
@@ -21,7 +20,7 @@ function App() {
   const [id, setId] = useState<number>()
 
   async function handleAddSnippet() {
-    const res = await fetch(`http://localhost:4000/`, {
+    await fetch(`http://localhost:4000/`, {
       method: "post",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
@@ -57,7 +56,7 @@ function App() {
   }, [])
 
   async function handleDeleteSnippet(props: IPasteBin) {
-    const res = await fetch(`http://localhost:4000/` + props.id.toString(), {
+    await fetch(`http://localhost:4000/` + props.id.toString(), {
       method: "delete",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
@@ -79,7 +78,7 @@ function App() {
 
   async function handleSubmitEdit() {
     if (id) {
-    const res = await fetch(`http://localhost:4000/` + id.toString(), {
+    await fetch(`http://localhost:4000/` + id.toString(), {
       method: "put",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
@@ -127,7 +126,7 @@ function App() {
           <option value='Python'> Python </option>
         </select>
         <button onClick={() => { handleGetAll(); handleAddSnippet() }}> SUBMIT </button>
-        <button> SUBMIT EDIT</button>
+        <button onClick={handleSubmitEdit}> SUBMIT EDIT</button>
       </div>
 
       <div className='list'>
