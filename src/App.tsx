@@ -20,7 +20,7 @@ function App() {
   const [id, setId] = useState<number>()
 
   async function handleAddSnippet() {
-    await fetch(`http://localhost:4000/`, {
+    await fetch(`https://mighty-citadel-67078.herokuapp.com/`, {
       method: "post",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
@@ -43,7 +43,7 @@ function App() {
   // }
 
   async function handleGetAll() {
-    const res = await fetch(`http://localhost:4000/`);
+    const res = await fetch(`https://mighty-citadel-67078.herokuapp.com/`);
     setPasteBin(await res.json());
     console.log(pasteBin)
     // console.log(res)
@@ -56,7 +56,7 @@ function App() {
   }, [])
 
   async function handleDeleteSnippet(props: IPasteBin) {
-    await fetch(`http://localhost:4000/` + props.id.toString(), {
+    await fetch(`https://mighty-citadel-67078.herokuapp.com/` + props.id.toString(), {
       method: "delete",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
@@ -78,17 +78,17 @@ function App() {
 
   async function handleSubmitEdit() {
     if (id) {
-    await fetch(`http://localhost:4000/` + id.toString(), {
-      method: "put",
-      headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
-      body: JSON.stringify({
-        id: id,
-        title: newTitle,
-        description: newDescription,
-        language: newLanguage
-      }),
-    }) 
-  };
+      await fetch(`https://mighty-citadel-67078.herokuapp.com/` + id.toString(), {
+        method: "put",
+        headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
+        body: JSON.stringify({
+          id: id,
+          title: newTitle,
+          description: newDescription,
+          language: newLanguage
+        }),
+      })
+    };
     handleGetAll();
   }
   function SeeSnippets(props: IPasteBin) {
