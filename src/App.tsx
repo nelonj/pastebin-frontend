@@ -95,11 +95,11 @@ function App() {
   function SeeSnippets(props: IPasteBin) {
 
     return (
-      <ul> {props.id} {props.description}
-        <button onClick={() => { handleDeleteSnippet(props) }}>Delete Snippet</button>
-        <button onClick={() => { setChosenSnippet(props) }}>See Snippet</button>
-        <button onClick={() => { handleEditAutocompleteSnippet(props) }}>Edit Snippet</button>
-      </ul>
+      <li> {props.id} {props.description}
+        <button onClick={() => { handleDeleteSnippet(props) }}>Delete</button>
+        <button onClick={() => { setChosenSnippet(props) }}>See</button>
+        <button onClick={() => { handleEditAutocompleteSnippet(props) }}>Edit</button>
+      </li>
     )
 
   }
@@ -109,11 +109,13 @@ function App() {
     <div className="App">
       <div className='input_box'>
         <input
+          className='title'
           value={newTitle}
           placeholder='insert title here!'
           onChange={e => setNewTitle(e.target.value)}
         ></input>
         <textarea
+          className='textarea'
           value={newDescription}
           placeholder='paste code snippet here!'
           onChange={e => setNewDescription(e.target.value)}
@@ -129,9 +131,9 @@ function App() {
       </div>
 
       <div className='list'>
-        <li>
+        <ul>
           {pasteBin.map((element, index) => <SeeSnippets {...element} key={index} />)}
-        </li>
+        </ul>
 
       </div>
       <div className='chosenSnippet'>

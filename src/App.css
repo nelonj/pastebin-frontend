@@ -3,7 +3,7 @@
   display: flex;
   /* flex-direction: row;
   flex-wrap: wrap; */
-  flex-flow: column wrap;
+  flex-flow: row wrap;
   justify-content: flex-start;
 }
 
@@ -13,7 +13,15 @@
   flex-wrap: wrap;
   flex-flow: column wrap;
   justify-content: flex-start;
+  width: 250px
 
+}
+.title{
+  height:50px
+}
+
+.textarea {
+  height: 100px
 }
 
 .list {
@@ -21,6 +29,15 @@
 }
 
 .chosenSnippet {
-
+  margin-left: 50px
 }
+
+button{
+  margin: 0.2rem;
+  border: 0.1rem groove black; 
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  background: orangered;
+  color: white;
+ }
 
