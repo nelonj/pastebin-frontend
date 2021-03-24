@@ -67,34 +67,39 @@ function App() {
     handleGetAll()
   };
 
-  async function handleEditSnippet(props: IPasteBin) {
+  function handleEditAutocompleteSnippet(props: IPasteBin) {
     //set state to selected id
     setNewTitle(props.title)
     setNewDescription(props.description)
     setNewLanguage(props.language)
+
+  };
+
+  async function handleSubmitEdit(props: IPasteBin) {
     const res = await fetch(`http://localhost:4000/` + props.id.toString(), {
       method: "put",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
         id: props.id,
-        title: "editTitleTest",
-        description: "editDescritpionTest",
-        language: "editLanguageTest"
+        title: newTitle,
+        description: newDescription,
+        language: newLanguage
       }),
     })
     handleGetAll()
-  };
-
+  }
   function SeeSnippets(props: IPasteBin) {
 
     return (
       <ul> {props.id} {props.description}
         <button onClick={() => { handleDeleteSnippet(props) }}>Delete Snippet</button>
         <button onClick={() => { setChosenSnippet(props) }}>See Snippet</button>
-        <button onClick={() => { handleEditSnippet(props) }}>Edit Snippet</button> </ul>
+        <button onClick={() => { handleEditAutocompleteSnippet(props) }}>Edit Snippet</button>
+        <button onClick={() => { handleSubmitEdit(props) }}>Submit Edit</button> </ul>
     )
 
   }
+
 
   return (
     <div className="App">
