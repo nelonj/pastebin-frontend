@@ -18,6 +18,7 @@ function App() {
   const [newTitle, setNewTitle] = useState("")
   const [newLanguage, setNewLanguage] = useState("")
   const [chosenSnippet, setChosenSnippet] = useState(emptyChosenSnippet)
+  const [id, setId] = useState<number>()
 
   async function handleAddSnippet() {
     const res = await fetch(`http://localhost:4000/`, {
@@ -72,21 +73,24 @@ function App() {
     setNewTitle(props.title)
     setNewDescription(props.description)
     setNewLanguage(props.language)
+    setId(props.id)
 
   };
 
-  async function handleSubmitEdit(props: IPasteBin) {
-    const res = await fetch(`http://localhost:4000/` + props.id.toString(), {
+  async function handleSubmitEdit() {
+    if (id) {
+    const res = await fetch(`http://localhost:4000/` + id.toString(), {
       method: "put",
       headers: { "Content-Type": "application/json" }, //need this to be read by app(express.json())
       body: JSON.stringify({
-        id: props.id,
+        id: id,
         title: newTitle,
         description: newDescription,
         language: newLanguage
       }),
-    })
-    handleGetAll()
+    }) 
+  };
+    handleGetAll();
   }
   function SeeSnippets(props: IPasteBin) {
 
@@ -95,7 +99,7 @@ function App() {
         <button onClick={() => { handleDeleteSnippet(props) }}>Delete Snippet</button>
         <button onClick={() => { setChosenSnippet(props) }}>See Snippet</button>
         <button onClick={() => { handleEditAutocompleteSnippet(props) }}>Edit Snippet</button>
-        <button onClick={() => { handleSubmitEdit(props) }}>Submit Edit</button> </ul>
+      </ul>
     )
 
   }
@@ -121,6 +125,7 @@ function App() {
           <option value='Python'> Python </option>
         </select>
         <button onClick={() => { handleGetAll(); handleAddSnippet() }}> SUBMIT </button>
+        <button> SUBMIT EDIT</button>
       </div>
 
       <div className='list'>
