@@ -139,6 +139,7 @@ function App() {
         <h1>{chosenSnippet.title}</h1>
         <p>{chosenSnippet.description}</p>
         <p>{chosenSnippet.language}</p>
+        <button> X</button>
       </div>
     </div>
   );
